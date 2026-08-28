@@ -1,0 +1,102 @@
+# Refreshes the aggregated data and publishes the site to GitHub Pages.
+#
+# Nothing is committed back to the repository. Each run seeds data/ from the
+# currently published site (so merge() keeps remembering older items and the
+# daily survey data survives the hourly runs), pulls the feeds, and deploys
+# index.html + assets/ + data/ straight to Pages.
+#
+# - Every hour: refresh the news ticker (fetch_news.py).
+# - Once a day (03:41 UTC): also refresh the arXiv surveys (fetch_surveys.py).
+# - On every push to main and on manual dispatch: run both fetchers.
+#
+# Pages source must be "GitHub Actions" (Settings -> Pages); configure-pages
+# switches it over on the first run.
+name: refresh
+
+on:
+  push:
+    branches: [main]
+  schedule:
+    - cron: "23 * * * *"   # hourly news ticker
+    - cron: "41 3 * * *"   # daily surveys refresh
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write      # deploy to GitHub Pages
+  id-token: write   # OIDC token required by deploy-pages
+
+# Queue runs instead of cancelling, so a deploy is never half-finished.
+concurrency:
+  group: refresh
+  cancel-in-progress: false
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - id: pages
+        uses: actions/configure-pages@v5
+        with:
+          enablement: true
+
+      # Previous state lives only on the published site. Missing files are
+      # fine (first run): the fetchers then start from scratch.
+      - name: Seed data from the published site
+        id: seed
+        env:
+          SITE: ${{ steps.pages.outputs.base_url }}
+        run: |
+          mkdir -p data/ticker data/surveys
+          for kind in ticker surveys; do
+            for id in all $(jq -r '.channels[].id' feeds.json); do
+              if ! curl -sf --retry 2 -o "data/$kind/$id.json" "$SITE/data/$kind/$id.json"; then
+                rm -f "data/$kind/$id.json"
+                echo "no previous $kind/$id.json"
+              fi
+            done
+          done
+          if [ ! -f data/surveys/all.json ]; then
+            echo "surveys_missing=true" >> "$GITHUB_OUTPUT"
+          fi
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+          cache: pip
+          cache-dependency-path: fetcher/requirements.txt
+
+      - run: pip install -r fetcher/requirements.txt
+
+      # A flaky feed must never block a deploy: the fetchers already skip
+      # failing sources, and continue-on-error covers anything else.
+      - name: Fetch news feeds
+        continue-on-error: true
+        run: python fetcher/fetch_news.py
+
+      # Daily, plus whenever there is no survey data to carry forward.
+      - name: Fetch arXiv surveys
+        if: github.event_name != 'schedule' || github.event.schedule == '41 3 * * *' || steps.seed.outputs.surveys_missing == 'true'
+        continue-on-error: true
+        run: python fetcher/fetch_surveys.py
+
+      - name: Assemble site
+        run: |
+          mkdir _site
+          cp -r index.html assets data _site/
+
+      - uses: actions/upload-pages-artifact@v3
+        with:
+          path: _site
+
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - id: deployment
+        uses: actions/deploy-pages@v4

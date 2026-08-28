@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta http-equiv="Content-Security-Policy"
+        content="default-src 'none'; script-src 'self'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; connect-src 'self'; img-src 'self'; base-uri 'none'; form-action 'none'" />
+  <meta name="referrer" content="no-referrer" />
+  <meta name="description" content="Aggregated live tickers and AI survey papers across fourteen verticals, from engineering and mathematics to markets and China AI." />
+  <title>SIGNALWIRE — engineering news console</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Archivo:wght@700;900&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="assets/style.css" />
+</head>
+<body>
+  <header class="masthead">
+    <div class="brand">
+      <h1>SIGNAL<span class="dim">WIRE</span></h1>
+      <span class="tagline">14 channels · aggregated</span>
+    </div>
+    <div class="status">
+      <span class="live-dot" aria-hidden="true"></span>
+      <span class="dim" id="live-label">LIVE</span>
+      <span id="clock" class="tabular">--:--</span>
+    </div>
+  </header>
+
+  <div class="wire-strip" aria-label="Latest headlines across all channels">
+    <div class="wire-track" id="wire"></div>
+  </div>
+
+  <nav class="rack" id="rack" aria-label="Channel filter"></nav>
+
+  <main class="content">
+    <section class="feed-section">
+      <div class="section-label" id="feed-label">ALL CHANNELS</div>
+      <ul class="feed" id="feed"></ul>
+      <div class="empty" id="feed-empty" hidden>
+        No items yet on this channel. The aggregator refreshes every 15 minutes.
+      </div>
+    </section>
+
+    <aside class="survey-section">
+      <div class="section-label">SURVEYS <span class="dim">· arXiv, ranked by citation velocity</span></div>
+      <ul class="surveys" id="surveys"></ul>
+      <div class="empty" id="surveys-empty" hidden>
+        No survey papers indexed for this channel yet.
+      </div>
+    </aside>
+  </main>
+
+  <footer class="foot">
+    <span id="updated-label">Loading data…</span>
+    <span>SignalWire — static aggregator · sources credited per item</span>
+  </footer>
+
+  <script src="assets/app.js"></script>
+</body>
+</html>

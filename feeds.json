@@ -1,0 +1,358 @@
+{
+  "channels": [
+    {
+      "id": "healthtech",
+      "label": "Health Tech",
+      "abbr": "HLT",
+      "color": "#2FBFAD",
+      "feeds": [
+        "https://www.medtechdive.com/feeds/news/",
+        {
+          "url": "https://www.fiercebiotech.com/rss/xml",
+          "source": "Fierce Biotech",
+          "include": "device|diagnostic|digital|\\bAI\\b|artificial intelligence|machine learning|deep learning|algorithm|software|robot|wearable|imaging|sensor|\\bapp\\b|telehealth|remote monitoring|health IT|\\bEHR\\b|electronic health record|biomarker test|blood test|sequenc|medtech|implant|surgical|3D print|cyber",
+          "max_items": 6
+        },
+        { "url": "https://www.fiercehealthcare.com/rss/xml", "source": "Fierce Healthcare", "max_items": 8 },
+        { "url": "https://www.statnews.com/category/health-tech/feed/", "source": "STAT Health Tech", "max_items": 8 },
+        { "url": "https://www.medicaldevice-network.com/feed/", "max_items": 6 },
+        { "url": "https://www.nature.com/npjdigitalmed.rss", "source": "npj Digital Medicine", "kind": "paper", "max_items": 6 },
+        {
+          "url": "https://api.fda.gov/device/recall.json?sort=event_date_initiated:desc&limit=25",
+          "type": "json",
+          "source": "FDA device recalls",
+          "kind": "advisory",
+          "path": "results",
+          "title": "Recall {product_res_number}: {recalling_firm} — {product_description}",
+          "link": "https://www.accessdata.fda.gov/scripts/cdrh/cfdocs/cfres/res.cfm?id={cfres_id}",
+          "date": "event_date_posted",
+          "max_items": 8
+        },
+        {
+          "url": "https://api.fda.gov/device/510k.json?sort=decision_date:desc&limit=20",
+          "type": "json",
+          "source": "FDA 510(k)",
+          "kind": "regulatory",
+          "path": "results",
+          "title": "510(k) cleared: {device_name} — {applicant}",
+          "link": "https://www.accessdata.fda.gov/scripts/cdrh/cfdocs/cfpmn/pmn.cfm?ID={k_number}",
+          "date": "decision_date",
+          "max_items": 6
+        }
+      ],
+      "arxiv_query": "(ti:survey OR ti:review) AND (cat:cs.LG OR cat:cs.AI) AND (abs:healthcare OR abs:medical OR abs:clinical)"
+    },
+    {
+      "id": "storage",
+      "label": "Storage Tech",
+      "abbr": "STO",
+      "color": "#5B8DEF",
+      "feeds": [
+        "https://blocksandfiles.com/feed/",
+        "https://www.storagereview.com/feed",
+        {
+          "url": "https://www.theregister.com/on_prem/storage/headlines.atom",
+          "source": "The Register",
+          "include": "storage|\\bSSD|\\bHDD|NAND|flash|NVMe|\\btape\\b|backup|\\bdisk|hard drive|\\bSAN\\b|\\bNAS\\b|object stor|file ?system|Pure Storage|NetApp|Seagate|Western Digital|Micron|Kioxia|SK hynix|Nutanix|VAST|Weka|Ceph",
+          "max_items": 5
+        },
+        { "url": "https://www.backblaze.com/blog/feed/", "source": "Backblaze", "max_items": 5 },
+        { "url": "https://klarasystems.com/feed/", "source": "Klara Systems", "max_items": 4 },
+        { "url": "https://www.snia.org/rss.xml", "source": "SNIA", "tags": ["standards"], "max_items": 5 }
+      ],
+      "arxiv_query": "(ti:survey OR ti:review) AND (cat:cs.OS OR cat:cs.DC OR cat:cs.DB) AND (abs:storage OR abs:\"file system\" OR abs:SSD)"
+    },
+    {
+      "id": "fintech",
+      "label": "Fintech",
+      "abbr": "FIN",
+      "color": "#D4A73C",
+      "feeds": [
+        "https://www.finextra.com/rss/headlines.aspx",
+        { "url": "https://www.bankingdive.com/feeds/news/", "source": "Banking Dive", "max_items": 8 },
+        { "url": "https://www.pymnts.com/feed/", "source": "PYMNTS", "max_items": 6 },
+        { "url": "https://www.paymentsdive.com/feeds/news/", "source": "Payments Dive", "max_items": 8 },
+        { "url": "https://stripe.com/blog/feed.rss", "source": "Stripe Blog", "max_items": 4 },
+        {
+          "url": "https://www.federalreserve.gov/feeds/press_all.xml",
+          "source": "Federal Reserve",
+          "kind": "regulatory",
+          "include": "payment|FedNow|digital asset|stablecoin|crypto|fintech|technolog|cyber|instant|token|CBDC|innovation|ISO 20022|settlement|novel activit|master account",
+          "max_items": 6
+        },
+        {
+          "url": "https://www.ecb.europa.eu/rss/press.html",
+          "source": "ECB",
+          "kind": "regulatory",
+          "include": "payment|digital euro|TARGET|\\bT2\\b|\\bTIPS\\b|instant|stablecoin|crypto|DLT|tokeni|fintech|cyber",
+          "max_items": 6
+        },
+        {
+          "url": "https://www.bis.org/doclist/bispapers.rss",
+          "source": "BIS Papers",
+          "kind": "paper",
+          "include": "payment|digital|CBDC|tokeni|crypto|stablecoin|fintech|\\bAI\\b|artificial intelligence|cyber|technolog|DLT|innovation|data",
+          "max_items": 5
+        },
+        { "url": "https://www.tradersmagazine.com/feed/", "source": "Traders Magazine", "tags": ["hft"], "max_items": 6 },
+        { "url": "https://www.marketsmedia.com/feed/", "source": "Markets Media", "tags": ["hft"], "max_items": 6 },
+        { "url": "https://quantocracy.com/feed/", "source": "Quantocracy", "kind": "weekly", "tags": ["quant"], "max_items": 3 },
+        { "url": "https://quantpedia.com/feed/", "source": "Quantpedia", "tags": ["quant"], "max_items": 5 },
+        { "url": "https://alphaarchitect.com/feed/", "source": "Alpha Architect", "tags": ["quant"], "include": "quant|factor|momentum|value invest|backtest|strateg|portfolio|alpha|systematic|trend|volatility|anomal", "max_items": 4 },
+        { "url": "https://rss.arxiv.org/rss/q-fin.TR", "source": "arXiv q-fin.TR", "kind": "paper", "tags": ["quant", "hft"], "max_items": 5 },
+        { "url": "https://rss.arxiv.org/rss/q-fin.CP", "source": "arXiv q-fin.CP", "kind": "paper", "tags": ["quant"], "max_items": 4 },
+        { "url": "https://www.cftc.gov/RSS/RSSGP/rssgp.xml", "source": "CFTC", "kind": "regulatory", "include": "algorithmic|automated|high.frequency|market structure|order book|SEF|swap|futures|options|clearing|market data|latency|spoofing|manipulation|derivative", "max_items": 5 },
+        { "url": "https://www.esma.europa.eu/rss.xml", "source": "ESMA", "kind": "regulatory", "include": "MiFID|MiFIR|algorithmic|high.frequency|trading|market structure|consolidated tape|market data|clearing|derivative|tick size|DLT|crypto|MiCA|settlement", "max_items": 5 }
+      ],
+      "arxiv_query": "(ti:survey OR ti:review) AND (cat:q-fin.CP OR cat:q-fin.TR OR cat:cs.LG) AND (abs:finance OR abs:financial OR abs:trading)"
+    },
+    {
+      "id": "stocks",
+      "label": "Stock Market",
+      "abbr": "STK",
+      "color": "#FFB020",
+      "feeds": [
+        { "url": "https://www.cnbc.com/id/15839069/device/rss/rss.html", "source": "CNBC Investing", "max_items": 8 },
+        { "url": "https://feeds.a.dj.com/rss/RSSMarketsMain.xml", "source": "WSJ Markets", "max_items": 8 },
+        { "url": "https://feeds.content.dowjones.io/public/rss/mw_topstories", "source": "MarketWatch", "max_items": 6 },
+        { "url": "https://feeds.content.dowjones.io/public/rss/mw_marketpulse", "source": "MarketWatch Market Pulse", "max_items": 6 },
+        { "url": "https://markets.businessinsider.com/rss/news", "source": "Business Insider Markets", "max_items": 6 },
+        { "url": "https://seekingalpha.com/market_currents.xml", "source": "Seeking Alpha", "max_items": 6 },
+        { "url": "https://www.sec.gov/news/pressreleases.rss", "source": "SEC", "kind": "regulatory", "max_items": 6 },
+        { "url": "https://www.federalreserve.gov/feeds/press_monetary.xml", "source": "Federal Reserve (monetary)", "kind": "regulatory", "tags": ["policy"], "max_items": 5 }
+      ],
+      "arxiv_query": "(ti:survey OR ti:review) AND (cat:q-fin.ST OR cat:q-fin.PM OR cat:q-fin.TR OR cat:q-fin.CP) AND (abs:stock OR abs:equity OR abs:market)"
+    },
+    {
+      "id": "energy",
+      "label": "Power & Energy",
+      "abbr": "PWR",
+      "color": "#E8763C",
+      "feeds": [
+        "https://www.canarymedia.com/rss.xml",
+        "https://spectrum.ieee.org/feeds/topic/energy.rss",
+        "https://www.utilitydive.com/feeds/news/",
+        { "url": "https://www.pv-magazine.com/feed/", "source": "pv magazine", "max_items": 8 },
+        { "url": "https://www.energy.gov/rss.xml", "source": "US DOE", "kind": "regulatory", "max_items": 6 }
+      ],
+      "arxiv_query": "(ti:survey OR ti:review) AND (cat:eess.SY OR cat:cs.LG) AND (abs:\"power grid\" OR abs:\"energy system\" OR abs:\"smart grid\")"
+    },
+    {
+      "id": "quantum",
+      "label": "Quantum",
+      "abbr": "QNT",
+      "color": "#9D7BEA",
+      "feeds": [
+        "https://thequantuminsider.com/feed/",
+        { "url": "https://quantumcomputingreport.com/feed/?format=rss", "source": "Quantum Computing Report", "max_items": 8 },
+        { "url": "https://www.quantamagazine.org/feed/", "source": "Quanta Magazine", "include": "quantum", "max_items": 4 },
+        { "url": "https://quantumfrontiers.com/feed/", "source": "Quantum Frontiers", "max_items": 3 },
+        { "url": "https://quantum-journal.org/feed/", "source": "Quantum (journal)", "kind": "paper", "max_items": 6 },
+        { "url": "https://www.nature.com/npjqi.rss", "source": "npj Quantum Information", "kind": "paper", "max_items": 6 }
+      ],
+      "arxiv_query": "(ti:survey OR ti:review) AND (cat:quant-ph) AND (abs:\"quantum computing\" OR abs:\"quantum machine learning\" OR abs:\"error correction\")"
+    },
+    {
+      "id": "semis",
+      "label": "Semiconductors",
+      "abbr": "SMI",
+      "color": "#45B8E0",
+      "feeds": [
+        "https://www.eetimes.com/feed/",
+        "https://semiengineering.com/feed/",
+        { "url": "https://spectrum.ieee.org/feeds/topic/semiconductors.rss", "source": "IEEE Spectrum", "max_items": 8 },
+        { "url": "https://chipsandcheese.com/feed", "source": "Chips and Cheese", "max_items": 5 },
+        { "url": "https://semiwiki.com/feed/", "source": "SemiWiki", "max_items": 5 },
+        { "url": "https://newsletter.semianalysis.com/feed", "source": "SemiAnalysis", "max_items": 4 },
+        { "url": "https://newsroom.intel.com/feed", "source": "Intel Newsroom", "max_items": 4 },
+        { "url": "https://riscv.org/feed/", "source": "RISC-V International", "tags": ["standards"], "max_items": 4 },
+        { "url": "https://www.jedec.org/rss.xml", "source": "JEDEC", "tags": ["standards"], "max_items": 5 },
+        { "url": "https://computeexpresslink.org/feed/", "source": "CXL Consortium", "tags": ["standards"], "max_items": 3 },
+        { "url": "https://standards.ieee.org/feed/", "source": "IEEE SA", "tags": ["standards"], "max_items": 5 }
+      ],
+      "arxiv_query": "(ti:survey OR ti:review) AND (cat:cs.AR OR cat:cs.LG) AND (abs:\"chip design\" OR abs:EDA OR abs:accelerator OR abs:hardware)"
+    },
+    {
+      "id": "photonics",
+      "label": "Photonics",
+      "abbr": "PHO",
+      "color": "#F072D6",
+      "feeds": [
+        { "url": "https://www.photonics.com/rss.aspx", "source": "Photonics Spectra", "max_items": 10 },
+        { "url": "https://www.electrooptics.com/rss.xml", "source": "Electro Optics", "max_items": 8 },
+        { "url": "https://phys.org/rss-feed/physics-news/optics-photonics/", "source": "Phys.org Optics", "max_items": 8 },
+        { "url": "https://www.nature.com/nphoton.rss", "source": "Nature Photonics", "kind": "paper", "max_items": 6 },
+        { "url": "https://www.nature.com/lsa.rss", "source": "Light: Science & Applications", "kind": "paper", "max_items": 5 },
+        {
+          "url": "https://export.arxiv.org/rss/physics.optics",
+          "source": "arXiv physics.optics",
+          "kind": "paper",
+          "include": "photonic|silicon photon|optical comput|optical neural|optical interconnect|integrated optic|neuromorphic|metasurface|lidar|transceiver|co-packaged|frequency comb|electro-optic|modulator|waveguide|microring|optical I/O",
+          "max_items": 8
+        }
+      ],
+      "arxiv_query": "(ti:survey OR ti:review) AND (cat:physics.optics OR cat:cs.ET OR cat:physics.app-ph) AND (abs:photonic OR abs:\"optical computing\" OR abs:\"integrated photonics\" OR abs:\"silicon photonics\")"
+    },
+    {
+      "id": "compilers",
+      "label": "Compilers",
+      "abbr": "CMP",
+      "color": "#E06377",
+      "feeds": [
+        { "url": "https://blog.janestreet.com/feed.xml", "source": "Jane Street Tech Blog", "kind": "weekly", "max_items": 3 },
+        "https://blog.llvm.org/index.xml",
+        "https://blog.rust-lang.org/feed.xml",
+        { "url": "https://discourse.llvm.org/tag/rfc.rss", "source": "LLVM Discourse · RFC", "max_items": 8 },
+        { "url": "https://llvmweekly.org/rss.xml", "source": "LLVM Weekly", "kind": "weekly", "max_items": 2 },
+        { "url": "https://this-week-in-rust.org/rss.xml", "source": "This Week in Rust", "kind": "weekly", "max_items": 2 },
+        { "url": "https://github.com/llvm/llvm-project/releases.atom", "source": "LLVM releases", "kind": "release", "max_items": 3 },
+        { "url": "https://github.com/rust-lang/rust/releases.atom", "source": "Rust releases", "kind": "release", "max_items": 3 },
+        { "url": "https://github.com/ziglang/zig/releases.atom", "source": "Zig releases", "kind": "release", "max_items": 2 },
+        { "url": "https://github.com/swiftlang/swift/releases.atom", "source": "Swift releases", "kind": "release", "max_items": 2 },
+        { "url": "https://github.com/golang/go/tags.atom", "source": "Go releases", "kind": "release", "include": "\\] go\\d+\\.\\d+(\\.\\d+)?\\s", "max_items": 3 },
+        { "url": "https://github.com/gcc-mirror/gcc/tags.atom", "source": "GCC releases", "kind": "release", "include": "^releases/gcc-", "max_items": 3 },
+        {
+          "url": "https://export.arxiv.org/rss/cs.PL",
+          "source": "arXiv cs.PL",
+          "kind": "paper",
+          "include": "compil|LLVM|MLIR|\\bJIT\\b|code generation|codegen|intermediate representation|optimi[sz]ation pass|vectori[sz]|register allocation|WebAssembly|\\bGPU\\b|autotun|polyhedral",
+          "max_items": 8
+        }
+      ],
+      "arxiv_query": "(ti:survey OR ti:review) AND (cat:cs.PL OR cat:cs.LG) AND (abs:compiler OR abs:compilation OR abs:\"code generation\" OR abs:\"program synthesis\")"
+    },
+    {
+      "id": "broadcast",
+      "label": "Broadcast Eng.",
+      "abbr": "BCE",
+      "color": "#B7C24A",
+      "feeds": [
+        "https://www.tvtechnology.com/feeds/all",
+        { "url": "https://www.tvbeurope.com/feed", "source": "TVBEurope", "max_items": 8 },
+        { "url": "https://www.redsharknews.com/rss.xml", "source": "RedShark News", "max_items": 5 },
+        { "url": "https://www.streamingmediablog.com/feed", "source": "StreamingMediaBlog", "max_items": 4 },
+        { "url": "https://www.atsc.org/feed/", "source": "ATSC", "tags": ["standards"], "max_items": 4 }
+      ],
+      "arxiv_query": "(ti:survey OR ti:review) AND (cat:eess.IV OR cat:cs.MM OR cat:cs.NI) AND (abs:video OR abs:streaming OR abs:broadcast)"
+    },
+    {
+      "id": "cyber",
+      "label": "Cyber Security",
+      "abbr": "SEC",
+      "color": "#63D471",
+      "feeds": [
+        "https://www.bleepingcomputer.com/feed/",
+        "https://therecord.media/feed",
+        { "url": "https://www.cisa.gov/cybersecurity-advisories/all.xml", "source": "CISA advisories", "kind": "advisory", "max_items": 8 },
+        {
+          "url": "https://www.cisa.gov/sites/default/files/feeds/known_exploited_vulnerabilities.json",
+          "type": "json",
+          "source": "CISA KEV",
+          "kind": "advisory",
+          "path": "vulnerabilities",
+          "title": "KEV: {cveID} {vendorProject} {product} — {vulnerabilityName}",
+          "link": "https://nvd.nist.gov/vuln/detail/{cveID}",
+          "date": "dateAdded",
+          "max_items": 10
+        },
+        { "url": "https://blog.talosintelligence.com/rss/", "source": "Cisco Talos", "max_items": 5 },
+        { "url": "https://krebsonsecurity.com/feed/", "source": "Krebs on Security", "max_items": 4 },
+        { "url": "https://www.schneier.com/feed/atom/", "source": "Schneier on Security", "max_items": 4 },
+        { "url": "https://googleprojectzero.blogspot.com/feeds/posts/default", "source": "Project Zero", "max_items": 3 },
+        {
+          "url": "https://export.arxiv.org/api/query?search_query=co:%22USENIX+Security%22&sortBy=submittedDate&sortOrder=descending&max_results=25",
+          "source": "USENIX Security (arXiv preprints)",
+          "kind": "paper",
+          "max_items": 6
+        },
+        {
+          "url": "https://api.openalex.org/works?filter=authorships.institutions.id:I4210128801,type:article%7Cpreprint,primary_location.source.id:!S4306400562&sort=publication_date:desc&per-page=25&select=id,title,publication_date,primary_location",
+          "type": "json",
+          "source": "CISPA Helmholtz Center",
+          "kind": "paper",
+          "path": "results",
+          "title": "{title}",
+          "link": "{primary_location[landing_page_url]}",
+          "date": "publication_date",
+          "max_items": 6
+        },
+        {
+          "url": "https://www.rfc-editor.org/rfcrss.xml",
+          "source": "RFC Editor",
+          "tags": ["standards"],
+          "include": "TLS|security|crypt|authenticat|privacy|attack|OAuth|DNSSEC|certificate|signature|threat|secure|HTTPS|DDoS|encryption|post-quantum|\\bMLS\\b|Kerberos|IPsec|\\bPKI\\b|\\bACME\\b|password|key exchange",
+          "max_items": 5
+        }
+      ],
+      "arxiv_query": "(ti:survey OR ti:review) AND (cat:cs.CR) AND (abs:security OR abs:malware OR abs:vulnerability)"
+    },
+    {
+      "id": "defence",
+      "label": "Military Defence",
+      "abbr": "DEF",
+      "color": "#93A3B8",
+      "feeds": [
+        "https://www.defensenews.com/arc/outboundfeeds/rss/?outputType=xml",
+        "https://breakingdefense.com/feed/",
+        { "url": "https://www.c4isrnet.com/arc/outboundfeeds/rss/?outputType=xml", "source": "C4ISRNET", "max_items": 8 },
+        { "url": "https://www.defenseone.com/rss/technology/", "source": "Defense One", "max_items": 6 },
+        { "url": "https://www.twz.com/feed", "source": "The War Zone", "max_items": 6 },
+        { "url": "https://www.navalnews.com/feed/", "source": "Naval News", "max_items": 5 },
+        { "url": "https://www.darpa.mil/rss.xml", "source": "DARPA", "max_items": 6 }
+      ],
+      "arxiv_query": "(ti:survey OR ti:review) AND (cat:cs.LG OR cat:eess.SP) AND (abs:radar OR abs:\"autonomous systems\" OR abs:UAV OR abs:defense)"
+    },
+    {
+      "id": "chinaai",
+      "label": "China AI",
+      "abbr": "CNA",
+      "color": "#D62839",
+      "feeds": [
+        { "url": "https://pandaily.com/feed", "source": "Pandaily", "max_items": 8 },
+        { "url": "https://technode.com/feed/", "source": "TechNode", "include": "\\bAI\\b|artificial intelligence|\\bLLMs?\\b|language model|large model|foundation model|chatbot|DeepSeek|Qwen|Doubao|Kimi|Moonshot|Zhipu|\\bGLM|MiniMax|Hunyuan|Ernie|Baidu|robot|humanoid|autonomous driving|self-driving|machine learning|neural|\\bGPU|Ascend|Nvidia|Cambricon|AI chip|compute|data cent|agentic|\\bagents?\\b", "max_items": 8 },
+        { "url": "https://www.scmp.com/rss/36/feed", "source": "SCMP Tech", "include": "\\bAI\\b|artificial intelligence|\\bLLMs?\\b|language model|large model|foundation model|chatbot|DeepSeek|Qwen|Doubao|Kimi|Moonshot|Zhipu|\\bGLM|MiniMax|Hunyuan|Ernie|Baidu|robot|humanoid|autonomous driving|self-driving|machine learning|neural|\\bGPU|Ascend|Nvidia|Cambricon|AI chip|compute|data cent|agentic|\\bagents?\\b", "max_items": 6 },
+        { "url": "https://news.google.com/rss/search?q=China+AI+OR+DeepSeek+OR+Qwen+OR+%22Chinese+AI%22&hl=en-US&gl=US&ceid=US:en", "source": "Google News", "max_items": 10 },
+        { "url": "https://www.bing.com/news/search?q=China+artificial+intelligence&format=rss", "source": "Bing News", "max_items": 5 },
+        { "url": "https://www.chinatalk.media/feed", "source": "ChinaTalk", "kind": "weekly", "include": "\\bAI\\b|artificial intelligence|\\bLLMs?\\b|language model|large model|foundation model|chatbot|DeepSeek|Qwen|Doubao|Kimi|Moonshot|Zhipu|\\bGLM|MiniMax|Hunyuan|Ernie|Baidu|robot|humanoid|autonomous driving|self-driving|machine learning|neural|\\bGPU|Ascend|Nvidia|Cambricon|AI chip|compute|data cent|agentic|\\bagents?\\b", "max_items": 3 },
+        { "url": "https://interconnected.blog/feed/", "source": "Interconnected", "kind": "weekly", "max_items": 2 },
+        { "url": "https://www.qbitai.com/feed", "source": "量子位 QbitAI", "max_items": 5 },
+        { "url": "https://www.leiphone.com/feed", "source": "雷峰网 Leiphone", "max_items": 5 }
+      ],
+      "arxiv_query": "ti:survey AND (cat:cs.CL OR cat:cs.AI OR cat:cs.LG OR cat:cs.CY) AND (abs:Chinese OR abs:China) AND (abs:LLM OR abs:\"language model\" OR abs:\"large model\" OR abs:\"AI governance\" OR abs:\"AI policy\" OR abs:\"AI industry\")"
+    },
+    {
+      "id": "math",
+      "label": "Mathematics",
+      "abbr": "MTH",
+      "color": "#8AB4F8",
+      "feeds": [
+        { "url": "https://rss.arxiv.org/rss/math.NT+math.AG", "source": "arXiv math.NT/AG", "kind": "paper", "max_items": 5 },
+        { "url": "https://rss.arxiv.org/rss/math.CO+math.PR", "source": "arXiv math.CO/PR", "kind": "paper", "max_items": 5 },
+        { "url": "https://rss.arxiv.org/rss/math.AP+math.DG", "source": "arXiv math.AP/DG", "kind": "paper", "max_items": 5 },
+        { "url": "https://rss.arxiv.org/rss/math.LO+math.GT+math.RT", "source": "arXiv math.LO/GT/RT", "kind": "paper", "max_items": 4 },
+        { "url": "https://annals.math.princeton.edu/feed", "source": "Annals of Mathematics", "kind": "paper", "max_items": 4 },
+        { "url": "https://link.springer.com/search.rss?facet-journal-id=222&search-within=Journal", "source": "Inventiones mathematicae", "kind": "paper", "max_items": 4 },
+        { "url": "https://www.ams.org/rss/jams.rss", "source": "Journal of the AMS", "kind": "paper", "max_items": 3 },
+        { "url": "https://www.ams.org/rss/bull.rss", "source": "Bulletin of the AMS", "kind": "paper", "max_items": 3 },
+        { "url": "https://www.quantamagazine.org/mathematics/feed/", "source": "Quanta Magazine", "max_items": 5 },
+        { "url": "https://plus.maths.org/content/rss.xml", "source": "Plus Magazine", "max_items": 3 },
+        { "url": "https://terrytao.wordpress.com/feed/", "source": "Terence Tao", "kind": "weekly", "max_items": 3 },
+        { "url": "https://gowers.wordpress.com/feed/", "source": "Gowers's Weblog", "kind": "weekly", "max_items": 2 },
+        { "url": "https://gilkalai.wordpress.com/feed/", "source": "Combinatorics and more", "kind": "weekly", "max_items": 3 }
+      ],
+      "arxiv_query": "(ti:survey OR ti:overview OR ti:introduction) AND (cat:math.NT OR cat:math.AG OR cat:math.CO OR cat:math.PR OR cat:math.AP OR cat:math.DG OR cat:math.GT OR cat:math.RT OR cat:math.LO)"
+    }
+  ],
+  "tag_rules": {
+    "standards": "\\b(IETF|RFC ?\\d{3,5}|JEDEC|PCI-?SIG|PCIe? ?[5-8](\\.0)?|CXL|UCIe|3GPP|IEEE ?(802|1588|P\\d{3,4})|ISO/IEC|ETSI|ITU-T|MIPI|USB4|HDMI 2\\.\\d|DisplayPort|ATSC 3(\\.0)?|DVB|SMPTE|OpenXLA|ONNX|Open Compute|NVMe|SNIA|Bluetooth SIG|O-RAN|W3C|OASIS|ratif(y|ies|ied|ication)|specification (release|published|final)|new standard|standards? (body|committee|group|track)|RISC-V (spec|profile|extension|ratif))",
+    "policy": "\\b(export controls?|Entity List|sanctions?|sanctioned|tariffs?|CHIPS (and Science )?Act|AI Act|regulat(or|ors|ion|ions|ory)|FCC|FTC|antitrust|DOJ|lawsuit|legislation|Congress|Senate|Parliament|Commission (fines|rules|approves|proposes|opens)|executive order|White House|NDAA|subsid(y|ies)|Ofcom|BNetzA|GDPR|Digital Markets Act|NIS2|Cyber Resilience Act|Bundestag|Bundesregierung)\\b",
+    "hft": "\\b(HFT|high.frequency trading|low.latency|latency arbitrage|market.making|market makers?|co-?location|tick.to.trade|order book|market microstructure|matching engine|algorithmic trading|algo trading|best execution|dark pools?|liquidity providers?|Citadel Securities|Jane Street|Virtu Financial|Jump Trading|Hudson River Trading|Optiver|Tower Research|XTX Markets|Flow Traders|DRW)\\b",
+    "quant": "\\b(quants?|quantitative (finance|trading|strateg[a-z]*|funds?|hedge funds?|research)|backtest[a-z]*|stat(istical)? ?arb[a-z]*|factor (investing|models?|premi[a-z]*)|systematic (trading|strateg[a-z]*|funds?)|risk parity|portfolio optimi[sz]ation|alpha (generation|decay|signals?)|time.series momentum|mean.reversion|implied volatility|option pricing|derivatives pricing|stochastic volatility|Black.Scholes|Renaissance Technologies|Two Sigma|AQR|Man AHL|D[.]? ?E[.]? Shaw|WorldQuant|Millennium Management|Point72)\\b"
+  },
+  "max_items_per_channel": 80,
+  "max_items_per_source": 6,
+  "max_items_all": 1200,
+  "max_surveys_per_channel": 12,
+  "fetch_timeout_seconds": 15,
+  "max_response_bytes": 5242880
+}

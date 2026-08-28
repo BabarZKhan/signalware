@@ -1,0 +1,4 @@
+# Fetched data is published straight to GitHub Pages, never committed.
+data/
+_site/
+__pycache__/
